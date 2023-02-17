@@ -106,6 +106,7 @@ set(_state_variable_names
     GIT_DESCRIBE
     GIT_BRANCH
     # >>>
+    GIT_LATEST_TAG
     # 1. Add the name of the additional git variable you're interested in monitoring
     #    to this list.
 )
@@ -247,6 +248,12 @@ function(GetGitState _working_dir)
     #    "execute_process()" command. Be sure to set them in
     #    the environment using the same variable name you added
     #    to the "_state_variable_names" list.
+    RunGitCommand(describe --abbrev=0 --tags ${object})
+    if(NOT exit_code EQUAL 0)
+      set(ENV{GIT_LATEST_TAG} "${object}")
+    else()
+      set(ENV{GIT_LATEST_TAG} "${output}")
+    endif()
 
 endfunction()
 

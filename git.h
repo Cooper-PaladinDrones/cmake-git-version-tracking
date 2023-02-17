@@ -52,6 +52,9 @@ const char* git_Describe();
 /// The symbolic reference tied to HEAD.
 const char* git_Branch();
 
+/// The most recent tag #
+const char* git_LatestTag();
+
 GIT_VERSION_TRACKING_EXTERN_C_END
 #undef GIT_VERSION_TRACKING_EXTERN_C_BEGIN
 #undef GIT_VERSION_TRACKING_EXTERN_C_END
@@ -144,6 +147,10 @@ inline const StringOrView Branch() {
   return kValue;
 }
 
+inline const StringOrView LatestTag() {
+  static const StringOrView kValue = internal::InitString(git_LatestTag());
+  return kValue;
+}
 }  // namespace git
 
 

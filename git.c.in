@@ -30,3 +30,6 @@ const char* git_Describe() {
 const char* git_Branch() {
     return "@GIT_BRANCH@";
 }
+const char* git_LatestTag() {
+    return "@GIT_LATEST_TAG@";
+}
